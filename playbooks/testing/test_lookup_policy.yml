@@ -1,0 +1,13 @@
+- hosts: lab
+  connection: local
+  gather_facts: false
+  vars:
+    provider:
+      ip_address: "{{ ansible_host }}"
+      username: "{{ lookup('env', 'PAN_USERNAME') }}"
+      password: "{{ lookup('env', 'PAN_PASSWORD') }}"
+
+  tasks:
+    - name: Test lookup policy tasks
+      ansible.builtin.include_tasks:
+        file: ../orchestrator/new/lookup_policy.yml

@@ -1,0 +1,36 @@
+---
+# Ansible Inventory for PAN-OS Policy Orchestration Lab
+#
+# This inventory defines Palo Alto Networks devices for policy automation.
+# The PAN_PASSWORD environment variable must be set with the device password.
+#
+# Usage:
+#   export PAN_PASSWORD="your_device_password"
+#   export PAN_USERNAME="your_panaorama_username"
+#   ansible-playbook -i inventory.yml playbooks/orchestrator/lab.yml
+
+all:
+  children:
+    lab:
+      hosts:
+        lab-panorama01:
+          ansible_host: < YOUR PANORAMA HOSTNAME OR IP HERE >
+          # Password should be provided via PAN_PASSWORD environment variable
+          # Example: export PAN_PASSWORD="admin_password"
+      vars:
+        # Common variables for lab environment
+        ansible_connection: local
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
+        # These variables are only used when creating COMPLETELY NEW policies
+        default_new_policy_device_group: Lab
+        default_new_policy_rulebase: post-rulebase
+        default_new_policy_tag: AUTOMATED
+        default_rule_location: bottom
+
+    prod:
+      hosts:
+        # Production devices will be added here
+      vars:
+        # Common variables for production environment
+        ansible_connection: local
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
