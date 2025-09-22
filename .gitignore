@@ -1,0 +1,39 @@
+# Test Results Directory
+# Exclude all test results but keep the directory structure
+test_results/runs/
+test_results/latest
+test_results/reports/
+test_results/archives/
+
+# Ansible temporary files
+*.retry
+.ansible/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+.env.local
+
+# IDE and editor files
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+inventory_real.yml
+collections

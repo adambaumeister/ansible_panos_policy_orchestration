@@ -1,0 +1,31 @@
+---
+# Deploy policy to the 'lab' environment.
+
+- hosts: lab
+  connection: local
+
+  vars:
+    provider:
+      ip_address: "{{ ansible_host }}"
+      username: "{{ lookup('env', 'PAN_USERNAME') }}"
+      password: "{{ lookup('env', 'PAN_PASSWORD') }}"
+    policy_match: false
+
+  vars_prompt:
+
+    - name: source_ip
+      prompt: SIP for policy. Must be an IP address, does not support FQDN.
+      private: false
+
+    - name: destination_ip
+      prompt: DIP for policy. Must be an IP address, does not support FQDN.
+      private: false
+
+    - name: application
+      prompt: Application for policy. Must be a valid PAN-OS application.
+      private: false
+
+  tasks:
+    - name: Test against Webserver outbound policy
+      ansible.builtin.include_tasks:
+        file: add_policy.yml
