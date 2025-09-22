@@ -1,0 +1,8 @@
+---
+# ansible-lint configuration
+
+profile: basic
+
+skip_list:
+  - key-order
+  - var-naming[non-string]

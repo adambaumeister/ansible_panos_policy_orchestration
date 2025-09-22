@@ -12,6 +12,8 @@
   gather_facts: false
   connection: local
 
+  name: Test connectivity to Panorama
+
   tasks:
     - name: Test Panorama connectivity and authentication
       paloaltonetworks.panos.panos_op:

@@ -50,17 +50,12 @@
   set_fact:
     _device_list:
       - "{{ _show_devices_output_dict.response.result.devices.entry }}"
-  when:
-    "_show_devices_output_dict.response.result.devices.entry is mapping"
-
-- debug:
-    msg: "Found {{ _device_list | length }} devices"
+  when: "_show_devices_output_dict.response.result.devices.entry is mapping"
 
 - name: Test the security policy - determines if a new policy is needed
   ansible.builtin.include_tasks:
     file: security_policy_match.yml
   with_items: "{{ _device_list }}"
-
 
 - name: Get the zone for the DESTINATION IP
   ansible.builtin.include_tasks:
@@ -70,4 +65,3 @@
   with_items: "{{ _device_list }}"
   when:
     - not matches_existing_policy
-

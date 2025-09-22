@@ -14,8 +14,8 @@
 
 - name: Display results
   debug:
-    msg: |
-      App object: {{ application }} 
+    msg: |-
+      App object: {{ application }}
       Added to group: {{ application_group }}
       Device group: {{ device_group }}
       Status: {{ 'SUCCESS' if group_addition is succeeded else 'FAILED' }}

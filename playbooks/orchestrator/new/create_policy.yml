@@ -53,7 +53,7 @@
     destination_zone: "{{ destination_zones }}"
     destination_ip: ["{{ destination_ip }}"]
     application: ["{{ application }}"]
-    action: 'allow'
+    action: "allow"
 
 - name: Update facts
   set_fact:
