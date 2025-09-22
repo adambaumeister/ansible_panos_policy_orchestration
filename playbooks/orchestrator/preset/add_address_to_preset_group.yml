@@ -29,7 +29,7 @@
 
 - name: Display results
   debug:
-    msg: |
+    msg: |-
       Address object: {{ created_object_name }}
       Added to group: {{ _address_group }}
       Device group: {{ device_group }}

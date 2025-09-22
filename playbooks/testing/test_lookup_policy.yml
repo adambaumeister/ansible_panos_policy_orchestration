@@ -1,6 +1,9 @@
+---
 - hosts: lab
   connection: local
   gather_facts: false
+  name: Test the Lookup Policy playbook
+
   vars:
     provider:
       ip_address: "{{ ansible_host }}"

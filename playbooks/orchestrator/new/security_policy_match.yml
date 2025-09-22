@@ -10,7 +10,7 @@
           username: "{{ provider.username }}"
           password: "{{ provider.password }}"
           serial_number: "{{ item.serial }}"
-        cmd: | 
+        cmd: |
           <test>
             <security-policy-match>
               <source>{{ source_ip }}</source>

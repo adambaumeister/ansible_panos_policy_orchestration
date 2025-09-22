@@ -3,7 +3,7 @@
 
 - hosts: lab
   connection: local
-
+  name: Deploy policy to the Lab Environment
   vars:
     provider:
       ip_address: "{{ ansible_host }}"
@@ -12,7 +12,6 @@
     policy_match: false
 
   vars_prompt:
-
     - name: source_ip
       prompt: SIP for policy. Must be an IP address, does not support FQDN.
       private: false

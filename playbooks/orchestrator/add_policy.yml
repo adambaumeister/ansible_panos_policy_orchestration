@@ -15,31 +15,32 @@
 
 # --- END PRESET POLICY SECTION ---
 
-- block:
-  - name: ADDRESS GROUP PRESET - Deploy the Source IP to policy based on the preset configuration
-    ansible.builtin.include_tasks:
-      file: preset/add_address_to_preset_group.yml
-    vars:
-      - _address: "{{ source_ip }}"
-      - _address_group: "{{ source_address_group }}"
-    when:
-      - source_address_group
+- name: Policy Creation Block
+  block:
+    - name: ADDRESS GROUP PRESET - Deploy the Source IP to policy based on the preset configuration
+      ansible.builtin.include_tasks:
+        file: preset/add_address_to_preset_group.yml
+      vars:
+        _address: "{{ source_ip }}"
+        _address_group: "{{ source_address_group }}"
+      when:
+        - source_address_group
 
-  - name: ADDRESS GROUP PRESET - Deploy the Destination IP to policy based on the preset configuration
-    ansible.builtin.include_tasks:
-      file: preset/add_address_to_preset_group.yml
-    vars:
-      - _address: "{{ destination_ip }}"
-      - _address_group: "{{ destination_address_group }}"
-    when:
-      - destination_address_group
+    - name: ADDRESS GROUP PRESET - Deploy the Destination IP to policy based on the preset configuration
+      ansible.builtin.include_tasks:
+        file: preset/add_address_to_preset_group.yml
+      vars:
+        _address: "{{ destination_ip }}"
+        _address_group: "{{ destination_address_group }}"
+      when:
+        - destination_address_group
 
-  - name: APP GROUP PRESET - Deploy the application to policy based on the preset configuration
-    ansible.builtin.include_tasks:
-      file: preset/add_application_to_preset_group.yml
-    when:
-      - application_group
-      - application
+    - name: APP GROUP PRESET - Deploy the application to policy based on the preset configuration
+      ansible.builtin.include_tasks:
+        file: preset/add_application_to_preset_group.yml
+      when:
+        - application_group
+        - application
   when:
     - policy_match
 
@@ -49,29 +50,29 @@
 
 - name: RULE CREATION BLOCK - Triggers when no preset rules match
   block:
-  - name: RULE policy lookup
-    ansible.builtin.include_tasks:
-      file: new/lookup_policy.yml
+    - name: RULE policy lookup
+      ansible.builtin.include_tasks:
+        file: new/lookup_policy.yml
 
-  - name: RULE creation
-    ansible.builtin.include_tasks:
-      file: new/create_policy.yml
+    - name: RULE creation
+      ansible.builtin.include_tasks:
+        file: new/create_policy.yml
 
-  - name: COMMIT all changes
-    paloaltonetworks.panos.panos_commit_panorama:
-      provider: '{{ provider }}'
-      device_groups: ["{{ device_group | default(default_new_policy_device_group) }}"]
-      description: 'Commit Changes'
-      admins:
-        - "{{ provider.username }}"
+    - name: COMMIT all changes
+      paloaltonetworks.panos.panos_commit_panorama:
+        provider: "{{ provider }}"
+        device_groups: ["{{ device_group | default(default_new_policy_device_group) }}"]
+        description: "Commit Changes"
+        admins:
+          - "{{ provider.username }}"
 
-  - name: PUSH to Device-group
-    paloaltonetworks.panos.panos_commit_push:
-      provider: '{{ provider }}'
-      style: 'device group'
-      name: "{{ device_group | default(default_new_policy_device_group) }}"
-      description: 'Commit and push changes'
-      admins:
-        - "{{ provider.username }}"
+    - name: PUSH to Device-group
+      paloaltonetworks.panos.panos_commit_push:
+        provider: "{{ provider }}"
+        style: "device group"
+        name: "{{ device_group | default(default_new_policy_device_group) }}"
+        description: "Commit and push changes"
+        admins:
+          - "{{ provider.username }}"
   when:
     - not policy_match

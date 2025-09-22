@@ -55,9 +55,6 @@
   loop_control:
     loop_var: vr
 
-- debug:
-    msg: "{{ _test_routing_result }}"
-
 - name: Get interfaces from results
   set_fact:
     _interface_list: "{{ _test_routing_result.results | panos_op_routing_result_to_interfaces }}"
@@ -74,4 +71,4 @@
 
 - name: Set the ZONE list
   set_fact:
-    destination_zones: "{{ destination_zones | default([]) + _show_interfaces_result | panos_op_get_zone_from_interface(_interface_list) }}"
+    destination_zones: "{{ destination_zones | default([]) + _show_interfaces_result | panos_op_get_zone_from_interface(_interface_list) | default([]) }}"
