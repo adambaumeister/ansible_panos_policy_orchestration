@@ -8,10 +8,15 @@
 # and given applications to the given application groups.
 # This allows for maximum control over the brownfield policy, but will only catch certain use cases.
 
-# WEBSERVERS
+# WEBSERVERS EXAMPLE
 - name: Test against Webserver outbound policy
   ansible.builtin.include_tasks:
     file: preset/webservers_outbound_policy.yml
+
+# SSH Jump Server Policy
+- name: Test against SSH Jumpserver inbound policy
+  ansible.builtin.include_tasks:
+    file: preset/ssh_jumpserver_inbound_access.yml
 
 # --- END PRESET POLICY SECTION ---
 
