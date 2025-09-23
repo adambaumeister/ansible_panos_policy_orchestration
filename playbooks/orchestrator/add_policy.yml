@@ -8,6 +8,10 @@
 # and given applications to the given application groups.
 # This allows for maximum control over the brownfield policy, but will only catch certain use cases.
 
+- name: Set Defaults
+  ansible.builtin.set_fact:
+    config_changed: false
+
 # WEBSERVERS EXAMPLE
 - name: Test against Webserver outbound policy
   ansible.builtin.include_tasks:
@@ -29,7 +33,7 @@
         _address: "{{ source_ip }}"
         _address_group: "{{ source_address_group }}"
       when:
-        - source_address_group
+        - source_address_group is defined
 
     - name: ADDRESS GROUP PRESET - Deploy the Destination IP to policy based on the preset configuration
       ansible.builtin.include_tasks:
@@ -38,14 +42,18 @@
         _address: "{{ destination_ip }}"
         _address_group: "{{ destination_address_group }}"
       when:
-        - destination_address_group
+        - destination_address_group is defined
 
     - name: APP GROUP PRESET - Deploy the application to policy based on the preset configuration
       ansible.builtin.include_tasks:
         file: preset/add_application_to_preset_group.yml
       when:
-        - application_group
-        - application
+        - application_group is defined
+        - application is defined
+
+    - name: Update that the config has changed
+      ansible.builtin.set_fact:
+        config_changed: true
   when:
     - policy_match
 
@@ -63,10 +71,20 @@
       ansible.builtin.include_tasks:
         file: new/create_policy.yml
 
+    - name: Update that the config has changed
+      ansible.builtin.set_fact:
+        config_changed: true
+
+  when:
+    - not policy_match
+
+
+- name: Commit Block - Triggers on any change
+  block:
     - name: COMMIT all changes
       paloaltonetworks.panos.panos_commit_panorama:
         provider: "{{ provider }}"
-        device_groups: ["{{ device_group | default(default_new_policy_device_group) }}"]
+        device_groups: [ "{{ device_group | default(default_new_policy_device_group) }}" ]
         description: "Commit Changes"
         admins:
           - "{{ provider.username }}"
@@ -80,4 +98,4 @@
         admins:
           - "{{ provider.username }}"
   when:
-    - not policy_match
+    - config_changed

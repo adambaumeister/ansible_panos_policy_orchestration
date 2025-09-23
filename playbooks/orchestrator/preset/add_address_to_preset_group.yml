@@ -34,6 +34,7 @@
     static_value: "{{ [created_object_name] + existing_group.gathered.static_value }}"
     state: present
   register: group_addition
+  when: created_object_name not in existing_group.gathered.static_value
 
 - name: Display results
   debug:
