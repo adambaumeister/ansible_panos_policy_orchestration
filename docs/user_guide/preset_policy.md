@@ -137,3 +137,16 @@ Run the `lab_policy.yml` playbook to deploy the policy.
 ```shell
 ansible-playbook playbooks/orchestrator/lab_policy.yml
 ```
+
+In this example, `lab_policy` will prompt for the SIP/DIP values and the application. In your environment, you may
+trigger this playbook (or another playbook for a different set of hosts) using EDA or any other system that can 
+populate these values.
+
+You will see the policy is matched and the relevant address groups updated.
+
+![img.png](run_lab_policy.png)
+
+## What next?
+
+So, what happens for policies that don't match any preset policies? Proceed to the [New Policy Creation](new_policy_creation.md)
+guide.
