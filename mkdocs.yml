@@ -23,6 +23,7 @@ markdown_extensions:
 plugins:
   - mkdocstrings
   - autorefs
+  - mermaid2
 
 theme:
   name: "material"
@@ -34,11 +35,14 @@ theme:
     - navigation.tabs.sticky
     - content.code.copy
     - content.code.select
-    -
-repo_url: https://github.com
+
+repo_url: https://github.com/adambaumeister/ansible_panos_policy_orchestration
 
 nav:
   - Introduction: index.md
+  - User Guide:
+      - Introduction: user_guide/introduction.md
+      - Preset Policy: user_guide/preset_policy.md
   - Changelog: CHANGELOG.md
 
 extra:

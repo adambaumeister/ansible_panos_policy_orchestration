@@ -13,8 +13,8 @@ This repository would be of interest to you if:
 
 ### Requirements
 
-🐍 Python 3.11+
-Ansible 2.13+
+ * 🐍 Python 3.11+
+ * Ansible 2.16+
 
 
 ### Install the Paloaltonetworks Collection
@@ -37,6 +37,8 @@ https://github.com/adambaumeister/ansible_panos_policy_orchestration.git
 ```yaml title='inventory.yml'
 all:
   children:
+    # the `lab` group is included here as an example, but you can layout your panorama devices however you like.
+    # Note you will need to create your own primary playbook mirroring `lab_policy.yml` if you change the grouping.
     lab:
       hosts:
         lab-panorama01:
@@ -44,8 +46,8 @@ all:
           # Password should be provided via PAN_PASSWORD environment variable
           # Example: export PAN_PASSWORD="admin_password"
           
-          # Username should be provided via PAN_PASSWORD environment variable
-          # Example: export PAN_USERNAME="admin_password"
+          # Username should be provided via PAN_USERNAME environment variable
+          # Example: export PAN_USERNAME="admin"
       vars:
         # Common variables for lab environment
         ansible_connection: local
@@ -57,3 +59,10 @@ all:
         default_rule_location: bottom
 ```
 
+### Run the connectivity playbook to validate connectivity
+
+```shell
+ansible-playbook playbooks/testing/connectivity.yml
+```
+
+[Proceed to the User Guide](user_guide/introduction.md)

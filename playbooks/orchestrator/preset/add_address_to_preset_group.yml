@@ -6,7 +6,7 @@
   ansible.builtin.set_fact:
     created_object_name: "addr_{{ _address | replace('.', '_') | replace('/', '_') }}"
 
-- name: Create ADDRESS object for source IP
+- name: Create ADDRESS object
   paloaltonetworks.panos.panos_address_object:
     provider: "{{ provider }}"
     device_group: "{{ device_group }}"
@@ -17,13 +17,23 @@
     state: present
   register: address_creation
 
+- name: Get existing objects
+  paloaltonetworks.panos.panos_address_group:
+    provider: "{{ provider }}"
+    device_group: "{{ device_group }}"
+    name: "{{ _address_group }}"
+    state: gathered
+  register: existing_group
+
+- debug:
+    msg: "{{ existing_group }}"
+
 - name: Add ADDRESS object to preset ADDRESS GROUP
   paloaltonetworks.panos.panos_address_group:
     provider: "{{ provider }}"
     device_group: "{{ device_group }}"
     name: "{{ _address_group }}"
-    static_value:
-      - "{{ created_object_name }}"
+    static_value: "{{ [created_object_name] + existing_group.gathered.static_value }}"
     state: present
   register: group_addition
 

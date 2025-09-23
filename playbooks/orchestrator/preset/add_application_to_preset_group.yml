@@ -2,13 +2,20 @@
 # Tasks file which adds a single given application into the given application group.
 # This file only runs when {{ application_group }} is set.
 
+- name: Get existing APPLICATION GROUP Objects
+  paloaltonetworks.panos.panos_application_group:
+    provider: "{{ provider }}"
+    device_group: "{{ device_group }}"
+    name: "{{ application_group }}"
+    state: gathered
+  register: existing_group
+
 - name: Add APPLICATION object to preset APPLICATION GROUP
   paloaltonetworks.panos.panos_application_group:
     provider: "{{ provider }}"
     device_group: "{{ device_group }}"
     name: "{{ application_group }}"
-    value:
-      - "{{ application }}"
+    value: "{{ [application] + existing_group.gathered.value }}"
     state: present
   register: group_addition
 

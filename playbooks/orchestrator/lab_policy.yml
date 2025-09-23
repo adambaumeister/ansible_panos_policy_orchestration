@@ -1,5 +1,5 @@
 ---
-# Deploy policy to the 'lab' environment.
+# Deploy policy to the 'lab' environment
 
 - hosts: lab
   connection: local
