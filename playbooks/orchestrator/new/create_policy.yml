@@ -77,3 +77,4 @@
 - name: Update facts
   set_fact:
     policy_created: "{{ rule_name }}"
+    config_changed: true

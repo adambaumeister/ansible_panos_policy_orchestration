@@ -37,3 +37,4 @@ Thumbs.db
 *.log
 inventory_real.yml
 collections
+logs
