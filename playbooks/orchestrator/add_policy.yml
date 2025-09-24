@@ -97,5 +97,13 @@
         description: "Commit and push changes"
         admins:
           - "{{ provider.username }}"
-  when:
-    - config_changed
+  when: config_changed
+
+- name: Test the new policy, if one was added
+  ansible.builtin.include_tasks:
+    file: new/lookup_policy.yml
+  when: config_changed
+
+- name: Print the results
+  ansible.builtin.debug:
+    msg: '{{ matches_existing_policy }}'

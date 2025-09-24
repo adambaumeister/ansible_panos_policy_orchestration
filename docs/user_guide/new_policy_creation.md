@@ -33,5 +33,6 @@ Because of this, we may resolve the one IP address to several zones.
 ## Test behavior
 
 Before adding a new rule, we test the traffic based on the provided source/destination and application on each
-firewall connected to panorama. If the traffic is not already allowed, the creation will continue.
+firewall connected to panorama. If the traffic is not already allowed, the creation will continue. This is documented
+in more detail in the [Testing Security Policies](policy_lookup.md) section.
 
