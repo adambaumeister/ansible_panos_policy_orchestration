@@ -84,7 +84,7 @@
     - name: COMMIT all changes
       paloaltonetworks.panos.panos_commit_panorama:
         provider: "{{ provider }}"
-        device_groups: [ "{{ device_group | default(default_new_policy_device_group) }}" ]
+        device_groups: ["{{ device_group | default(default_new_policy_device_group) }}"]
         description: "Commit Changes"
         admins:
           - "{{ provider.username }}"
