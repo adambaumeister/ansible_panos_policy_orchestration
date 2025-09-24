@@ -1,5 +1,15 @@
 # Ansible PAN-OS Policy Automation
 
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/adambaumeister/ansible_panos_policy_orchestration)
+![GitHub commits difference between two branches/tags/commits](https://img.shields.io/github/commits-difference/adambaumeister/ansible_panos_policy_orchestration?base=master&head=develop&label=Changes%20Pending%20Release)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/adambaumeister/ansible_panos_policy_orchestration/ci.yml)
+![GitHub License](https://img.shields.io/github/license/adambaumeister/ansible_panos_policy_orchestration)
+![GitHub Repo stars](https://img.shields.io/github/stars/adambaumeister/ansible_panos_policy_orchestration)
+![GitHub Release](https://img.shields.io/github/v/release/adambaumeister/ansible_panos_policy_orchestration)
+
+
+
+
 This repository provides a framework and a philosophy for creating PAN-OS security policies
 via Automation.
 
