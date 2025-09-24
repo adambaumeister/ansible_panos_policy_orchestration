@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/adambaumeister/ansible_panos_policy_orchestration/compare/v1.0.0...v1.1.0) (2025-09-24)
+
+
+### Bug Fixes
+
+* Commit and Push now occurs for preset and new policies ([56842ef](https://github.com/adambaumeister/ansible_panos_policy_orchestration/commit/56842efae5530f872e54ddfe1bf9b6a516f485d1))
+
+
+### Features
+
+* Test process now runs before and after any changes ([cba7db8](https://github.com/adambaumeister/ansible_panos_policy_orchestration/commit/cba7db8e36ce270a750d2eb8538913f0c06c3b99))
+
 # 1.0.0 (2025-09-23)
 
 
