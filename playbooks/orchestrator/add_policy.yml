@@ -116,13 +116,13 @@
 
 - name: Test the changes, if there were changes
   block:
-  - name: Test the new policy, if one was added
-    ansible.builtin.include_tasks:
-      file: new/lookup_policy.yml
+    - name: Test the new policy, if one was added
+      ansible.builtin.include_tasks:
+        file: new/lookup_policy.yml
 
-  - name: Print the results
-    ansible.builtin.debug:
-      msg: '{{ matches_existing_policy }}'
+    - name: Print the results
+      ansible.builtin.debug:
+        msg: '{{ matches_existing_policy }}'
   when:
     - config_changed
     - source_ip is defined
