@@ -22,6 +22,11 @@
   ansible.builtin.include_tasks:
     file: preset/ssh_jumpserver_inbound_access.yml
 
+# SSH Jump Server Policy
+- name: Test against outbound user access
+  ansible.builtin.include_tasks:
+    file: preset/user_outbound_policy.yml
+
 # --- END PRESET POLICY SECTION ---
 
 - name: Policy Creation Block
@@ -51,6 +56,12 @@
         - application_group is defined
         - application is defined
 
+    - name: URL CATEGORY  PRESET - Deploy the URL to the given category based on the preset configuration
+      ansible.builtin.include_tasks:
+        file: preset/add_url_to_preset_category.yml
+      when:
+        - destination_url_category is defined
+
     - name: Update that the config has changed
       ansible.builtin.set_fact:
         config_changed: true
@@ -60,6 +71,7 @@
 # --- Custom Section ---
 # This section of tasks will attempt to create new security policies by caluclating as many values as possible
 # Rules that are created here will always be grouped by TAG.
+# For this to run it requires at least source ip, destination IP and an application to be given.
 
 - name: RULE CREATION BLOCK - Triggers when no preset rules match
   block:
@@ -77,6 +89,9 @@
 
   when:
     - not policy_match
+    - source_ip
+    - destination_ip
+    - application
 
 
 - name: Commit Block - Triggers on any change
@@ -99,11 +114,16 @@
           - "{{ provider.username }}"
   when: config_changed
 
-- name: Test the new policy, if one was added
-  ansible.builtin.include_tasks:
-    file: new/lookup_policy.yml
-  when: config_changed
+- name: Test the changes, if there were changes
+  block:
+  - name: Test the new policy, if one was added
+    ansible.builtin.include_tasks:
+      file: new/lookup_policy.yml
 
-- name: Print the results
-  ansible.builtin.debug:
-    msg: '{{ matches_existing_policy }}'
+  - name: Print the results
+    ansible.builtin.debug:
+      msg: '{{ matches_existing_policy }}'
+  when:
+    - config_changed
+    - source_ip is defined
+    - destination_ip is defined
