@@ -9,5 +9,7 @@
     application_group: PRESET_JUMPHOST_APPS # If an application is passed, we should also include it in the policy.
     device_group: Lab # Finally, we set the device group!
   when:
+    - source_ip is defined
+    - destination_ip is defined
     - "'10.10.11.0/24' | ansible.utils.network_in_network( destination_ip )"
     - "not '10.0.0.0/8' | ansible.utils.network_in_network( source_ip )"
