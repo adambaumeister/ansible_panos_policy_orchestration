@@ -22,7 +22,7 @@
   ansible.builtin.include_tasks:
     file: preset/ssh_jumpserver_inbound_access.yml
 
-# SSH Jump Server Policy
+# Outbound User access to websites
 - name: Test against outbound user access
   ansible.builtin.include_tasks:
     file: preset/user_outbound_policy.yml
