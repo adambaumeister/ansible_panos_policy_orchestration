@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/adambaumeister/ansible_panos_policy_orchestration/compare/v1.1.0...v1.2.0) (2025-09-25)
+
+
+### Features
+
+* Preset policy now also supports URL category additions ([172f274](https://github.com/adambaumeister/ansible_panos_policy_orchestration/commit/172f27444514a15c7cf1fc737c4571ed23793f41))
+
 # [1.1.0](https://github.com/adambaumeister/ansible_panos_policy_orchestration/compare/v1.0.0...v1.1.0) (2025-09-24)
 
 
