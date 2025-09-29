@@ -81,13 +81,13 @@
 
     - name: Create Rule Block
       block:
-      - name: RULE creation
-        ansible.builtin.include_tasks:
-          file: new/create_policy.yml
+        - name: RULE creation
+          ansible.builtin.include_tasks:
+            file: new/create_policy.yml
 
-      - name: Update that the config has changed
-        ansible.builtin.set_fact:
-          config_changed: true
+        - name: Update that the config has changed
+          ansible.builtin.set_fact:
+            config_changed: true
       when:
         - not matches_existing_policy
 
