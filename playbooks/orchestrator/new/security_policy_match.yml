@@ -42,7 +42,8 @@
         cmd_is_xml: true
       register: security_policy_match_result
 
-- debug:
+- name: Print the result
+  debug:
     msg: "{{ security_policy_match_result }}"
 
 - name: Set the policy match result
