@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/adambaumeister/ansible_panos_policy_orchestration/compare/v1.2.0...v1.2.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* Simplified test security policy match playbook ([6d0c7c2](https://github.com/adambaumeister/ansible_panos_policy_orchestration/commit/6d0c7c2a24df51437faf9ca5b00b670d615ea486))
+* Test command actually implemented properly ([a496036](https://github.com/adambaumeister/ansible_panos_policy_orchestration/commit/a496036feeaa1ab7f1862cf955bebde5bb58ff38))
+
 # [1.2.0](https://github.com/adambaumeister/ansible_panos_policy_orchestration/compare/v1.1.0...v1.2.0) (2025-09-25)
 
 
